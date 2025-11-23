@@ -1,0 +1,85 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-test:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Cache Cargo registry
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Run Tests
+      run: cargo test --verbose
+
+    - name: Build Release
+      run: cargo build --release --verbose
+
+    - name: Get Binary Name (Unix)
+      if: matrix.os != 'windows-latest'
+      run: echo "BINARY_NAME=blanktrace" >> $GITHUB_ENV
+
+    - name: Get Binary Name (Windows)
+      if: matrix.os == 'windows-latest'
+      run: echo "BINARY_NAME=blanktrace.exe" >> $GITHUB_ENV
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: blanktrace-${{ matrix.os }}
+        path: target/release/${{ env.BINARY_NAME }}
+
+  create-release:
+    name: Create Release
+    needs: build-and-test
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+
+    - name: Rename and Package Artifacts
+      run: |
+        mkdir release_assets
+        cp artifacts/blanktrace-ubuntu-latest/blanktrace release_assets/blanktrace-linux-amd64
+        cp artifacts/blanktrace-macos-latest/blanktrace release_assets/blanktrace-darwin-amd64
+        cp artifacts/blanktrace-windows-latest/blanktrace.exe release_assets/blanktrace-windows-amd64.exe
+        chmod +x release_assets/blanktrace-linux-amd64
+        chmod +x release_assets/blanktrace-darwin-amd64
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: release_assets/*
+        generate_release_notes: true

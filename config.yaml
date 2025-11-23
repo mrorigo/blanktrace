@@ -1,0 +1,40 @@
+fingerprint:
+  rotation_mode: "launch"  # every_request, interval, launch
+  rotation_interval: 3600  # seconds (for interval mode)
+  randomize_user_agent: true
+  randomize_accept_language: true
+  strip_referer: true
+  # List of Accept-Language values to randomly choose from
+  accept_languages:
+    - "en-US,en;q=0.9"
+    - "en-GB,en;q=0.8"
+    # Add more as needed, e.g.:
+    # - "de-DE,de;q=0.9"
+    # - "es-ES,es;q=0.9"
+
+cookies:
+  block_all: true
+  log_attempts: true
+  allow_list:
+    - "github.com"
+    - "stackoverflow.com"
+  block_list:
+    - "doubleclick.net"
+    - "facebook.com"
+
+blocking:
+  auto_block: true
+  auto_block_threshold: 5
+  block_patterns:
+    - ".*analytics.*"
+    - ".*doubleclick.*"
+    - ".*google-analytics.*"
+
+cleanup:
+  enabled: true
+  retention_days: 7
+  interval_seconds: 3600
+
+port: 8080
+
+db_path: "blanktrace.db"
