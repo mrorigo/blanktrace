@@ -8,7 +8,7 @@ license = "MIT"
 readme = "README.md"
 keywords = ["privacy", "proxy", "mitm", "security", "anonymity", "blanktrace"]
 categories = ["command-line-utilities", "network-programming"]
-repository = "https://github.com/golden-void/blanktrace"
+repository = "https://github.com/mrorigo/blanktrace"
 
 [[bin]]
 name = "blanktrace"
