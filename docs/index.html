@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlankTrace - Anonymous by Design</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom styles for a clean, tech-focused look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            /* GitHub Dark Mode background */
+            color: #c9d1d9;
+            /* Light text color */
+        }
+
+        .section-header {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #58a6ff;
+            /* Primary blue for headers */
+            border-bottom: 2px solid #238636;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(88, 166, 255, 0.2), 0 4px 6px -4px rgba(88, 166, 255, 0.1);
+        }
+
+        .code-block {
+            background-color: #161b22;
+            /* Darker code background */
+            border-left: 4px solid #58a6ff;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Custom animation for the pulsing button */
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .pulse-effect {
+            position: relative;
+        }
+
+        .pulse-ring {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border-radius: 9999px;
+            background-color: #58a6ff;
+            opacity: 0;
+            animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+            z-index: 0;
+        }
+
+        .pulse-effect button {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Gradient for the header background */
+        .hero-bg {
+            background: radial-gradient(circle at top, #161b22 10%, #0d1117 70%);
+        }
+
+        /* Specific styling for the header text */
+        .hero-title {
+            text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <!-- Navbar/Header Placeholder -->
+    <header class="py-4 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="text-3xl font-extrabold flex items-center">
+                <span class="text-white">Blank</span><span class="text-[#58a6ff]">Trace</span>
+            </div>
+            <a href="#github-link"
+                class="text-sm font-medium text-gray-400 hover:text-[#58a6ff] transition duration-200">
+                View on GitHub
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg pt-16 pb-24 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="w-32 h-32 mx-auto mb-6">
+                <!-- BlankTrace logo icon: Reverting back to original SVG placeholder -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-[#58a6ff]" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M7 12H17" />
+                    <path d="M10 9L14 15" />
+                    <path d="M14 9L10 15" />
+                    <path d="M12 18V6" />
+                </svg>
+            </div>
+
+            <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4">
+                Blank<span class="text-[#58a6ff]">Trace</span>
+            </h1>
+            <h2 class="text-xl sm:text-2xl text-gray-400 font-medium mb-8">
+                ANONYMOUS BY DESIGN.
+                <br class="sm:hidden">
+                The Cross-Platform Rust CLI Proxy that Kills Tracing.
+            </h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-300 mb-10">
+                BlankTrace is a powerful, cross-platform (Linux/macOS) Rust CLI/daemon MITM proxy that anonymizes
+                browser traffic by randomizing digital fingerprints, blocking invasive trackers, and stripping
+                identifying cookies.
+            </p>
+
+            <div class="pulse-effect inline-block">
+                <span class="pulse-ring"></span>
+                <a href="#github-link"
+                    class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-[#58a6ff] hover:bg-[#79b8ff] transition duration-300 shadow-lg shadow-[#58a6ff]/40">
+                    Get Started on GitHub
+                    <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-[#161b22]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="section-header text-center mx-auto mb-12">Core Features</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Feature 1: Fingerprint Randomization -->
+                <div class="feature-card p-6 rounded-lg bg-[#0d1117] border border-gray-800">
+                    <i data-lucide="shuffle" class="w-10 h-10 text-emerald-400 mb-4"></i>
+                    <h4 class="text-xl font-semibold text-white mb-2">Fingerprint Randomization</h4>
+                    <p class="text-gray-400">Random User-Agent (using `rand_agents` for realism) and Accept-Language
+                        headers are rotated to hide your unique browser signature.</p>
+                </div>
+
+                <!-- Feature 2: Cookie & Tracker Blocking -->
+                <div class="feature-card p-6 rounded-lg bg-[#0d1117] border border-gray-800">
+                    <i data-lucide="shield-half" class="w-10 h-10 text-red-400 mb-4"></i>
+                    <h4 class="text-xl font-semibold text-white mb-2">Cookie & Tracker Blocking</h4>
+                    <p class="text-gray-400">Block all cookies, strip them from requests, and apply regex-based domain
+                        blocking with full whitelist control.</p>
+                </div>
+
+                <!-- Feature 3: MITM Proxy & Logging -->
+                <div class="feature-card p-6 rounded-lg bg-[#0d1117] border border-gray-800">
+                    <i data-lucide="server-cog" class="w-10 h-10 text-yellow-400 mb-4"></i>
+                    <h4 class="text-xl font-semibold text-white mb-2">MITM Proxy & Logging</h4>
+                    <p class="text-gray-400">Runs as an HTTP/HTTPS proxy on `localhost:8080`. Async SQLite logging
+                        tracks all activity, blocks, and rotations.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start & CLI Section -->
+    <section id="quickstart" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="section-header mb-12">Quick Start & CLI</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Build & Run -->
+                <div>
+                    <h4 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="rocket" class="w-6 h-6 mr-2 text-[#58a6ff]"></i>
+                        1. Build & Run Proxy
+                    </h4>
+                    <p class="text-gray-400 mb-4">Get up and running in minutes using Rust's cargo toolchain. The proxy
+                        automatically generates a CA certificate for HTTPS interception.</p>
+                    <div class="code-block p-4 rounded-lg mb-6">
+                        <p class="text-sm text-gray-300 select-none">$ cargo build --release</p>
+                        <p class="text-sm text-gray-300 select-none">$ cargo run blanktrace</p>
+                    </div>
+                    <p class="text-sm text-yellow-500 font-semibold">
+                        ⚠️ Important: You must trust the generated CA certificate in your browser for HTTPS interception
+                        to work.
+                    </p>
+                </div>
+
+                <!-- CLI Commands -->
+                <div>
+                    <h4 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="terminal" class="w-6 h-6 mr-2 text-[#58a6ff]"></i>
+                        2. CLI Management
+                    </h4>
+                    <p class="text-gray-400 mb-4">Manage the daemon, view real-time statistics, and control domain lists
+                        directly from the command line.</p>
+                    <div class="code-block p-4 rounded-lg space-y-2">
+                        <p class="text-sm text-gray-300 select-all">$ cargo run blanktrace stats</p>
+                        <p class="text-sm text-gray-300 select-all">$ cargo run blanktrace domains --limit 10</p>
+                        <p class="text-sm text-gray-300 select-all">$ cargo run blanktrace whitelist --domain
+                            example.com</p>
+                        <p class="text-sm text-gray-300 select-all">$ cargo run blanktrace export --file export.json</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configuration & Status Section -->
+    <section id="config" class="py-20 bg-[#161b22]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="section-header mb-12">Deep Configuration</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Configuration Example -->
+                <div>
+                    <h4 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="settings" class="w-6 h-6 mr-2 text-gray-500"></i>
+                        Customizing behavior via `config.yaml`
+                    </h4>
+                    <p class="text-gray-400 mb-4">Fine-tune fingerprint rotation, cookie policies, and domain blocking
+                        patterns to suit your specific privacy needs.</p>
+                    <div class="code-block p-6 rounded-lg overflow-x-auto text-xs sm:text-sm max-h-96">
+                        <pre class="text-gray-300">
+fingerprint:
+  rotation_mode: "launch"  # every_request, interval, launch
+  rotation_interval: 3600  # seconds (for interval mode)
+  randomize_user_agent: true
+  randomize_accept_language: true
+  strip_referer: true
+
+cookies:
+  block_all: true
+  log_attempts: true
+  auto_block_trackers: true
+  allow_list:
+    - "github.com"
+    - "stackoverflow.com"
+
+blocking:
+  auto_block: true
+  block_patterns:
+    - ".*analytics.*"
+    - ".*doubleclick.*"
+port: 8080
+db_path: "blanktrace.db"</pre>
+                    </div>
+                </div>
+
+                <!-- Status & Architecture -->
+                <div>
+                    <h4 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <i data-lucide="check-circle" class="w-6 h-6 mr-2 text-green-500"></i>
+                        Current Status & Architecture
+                    </h4>
+                    <div class="space-y-4">
+                        <ul class="space-y-2 text-gray-400">
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="w-5 h-5 mr-2 mt-1 text-green-500 flex-shrink-0"></i>
+                                <div><strong class="text-white">Full Proxy Functionality:</strong> HTTP/HTTPS
+                                    Interception with hudsucker 0.4.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="w-5 h-5 mr-2 mt-1 text-green-500 flex-shrink-0"></i>
+                                <div><strong class="text-white">Realistic Randomization:</strong> Uses the `rand_agents`
+                                    crate for high-quality, diverse user agents.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="w-5 h-5 mr-2 mt-1 text-green-500 flex-shrink-0"></i>
+                                <div><strong class="text-white">Modular Rust Architecture:</strong> Dedicated modules
+                                    for proxy, database, randomizer, and blocker for maintainability and performance.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="alert-triangle"
+                                    class="w-5 h-5 mr-2 mt-1 text-yellow-500 flex-shrink-0"></i>
+                                <div><strong class="text-white">Limitation:</strong> Manual CA certificate installation
+                                    is required for HTTPS.</div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-2xl font-semibold text-white mt-8 mb-4 flex items-center">
+                        <i data-lucide="database" class="w-6 h-6 mr-2 text-purple-400"></i>
+                        SQLite Logging
+                    </h4>
+                    <p class="text-gray-400">All activity is logged asynchronously, tracking domains, IPs, cookie
+                        traffic, and fingerprint rotations for full transparency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Footer -->
+    <footer id="github-link" class="py-12 border-t border-gray-800 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-white mb-4">
+                Ready to Take Back Control?
+            </h3>
+            <p class="text-lg text-gray-400 mb-6">
+                Explore the source code, contribute, or report issues on GitHub.
+            </p>
+            <a href="https://github.com/mrorigo/blanktrace" target="_blank"
+                class="inline-flex items-center justify-center px-10 py-3 border border-gray-700 text-base font-medium rounded-full text-white bg-gray-700 hover:bg-gray-600 transition duration-300">
+                <i data-lucide="github" class="w-5 h-5 mr-2"></i>
+                Visit the GitHub Repository
+            </a>
+            <p class="mt-8 text-sm text-gray-500">
+                &copy; 2024 BlankTrace Project. Licensed under MIT.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

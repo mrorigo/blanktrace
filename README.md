@@ -1,4 +1,4 @@
-<img src="blanktrace.png">
+<img src="docs/blanktrace.png">
 
 # BlankTrace
 
